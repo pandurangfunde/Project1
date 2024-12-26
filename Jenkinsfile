@@ -6,6 +6,12 @@ pipeline{
                 git url:'https://github.com/pandurangfunde/Project1.git',branch:'main'
             }
         }
+        stage("Cleanup Stage") {
+            steps {
+                sh 'docker rm -f $(docker ps -aq)'
+            }
+        }
+
         stage("Build Docker image") {
             steps {
                 sh 'docker build -t myimage .'
